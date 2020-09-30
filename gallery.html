@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+	<!--HEAD OF PAGE-->
+	<h3>Gallery Page</h3>
+	<div id="gallerybox" style="width:1000px; height:200px; border: 2px solid #E8F5FF; background-color: #F9FFFF;">
+	<!--USING 'MOUSEOVER' AND 'MOUSEOUT' TO FUNCTION WHILE MOUSE IS OVER THE IMAGE OR OUT OF IMAGE-->
+	<img src="https://cdn.pixabay.com/photo/2020/04/21/19/30/rome-5074421_960_720.jpg" alt="Vatican, Rome" style="width:180px; height:150px; margin-left:20px; margin-top:20px;" onmouseout="showImage(-1);" onmouseover="showImage(0);">
+	<img src="https://cdn.pixabay.com/photo/2018/12/01/00/10/blue-hour-3848856_960_720.jpg" alt="Berlin, Germany" 
+	style="width:180px; height:150px; margin-left:20px; margin-top:20px;" onmouseout="showImage(-1);" onmouseover="showImage(1);">
+	<img src="https://cdn.pixabay.com/photo/2020/05/15/13/58/new-york-5173657_960_720.jpg" alt="Manhattan, New York"
+	style="width:180px; height:150px; margin-left:20px; margin-top:20px;" onmouseout="showImage(-1);" onmouseover="showImage(2);">
+	<img src="https://cdn.pixabay.com/photo/2020/04/25/13/15/venice-5090764_960_720.jpg" alt="Venice, Italy"
+	style="width:180px; height:150px; margin-left:20px; margin-top:20px;" onmouseout="showImage(-1);" onmouseover="showImage(3);">  
+	</div>
+	<br />
+	<!-- DIV BOXES TO DISPLAY THE DESCRIPTION AND IMAGES-->
+	<div id="descBox" style="width:1000px; height:50px; border: 2px solid #E8F5FF; background-color: #F9FFFF;">
+	</div>
+	<div id="imgBox" style="width: 1000px; height: 650px; border: 2px solid #E8F5FF; background-color: #F9FFFF;">
+	</div>
+
+
+	<script>
+		// USING TAG NAME, RETRIEVE ALL IMAGE TAGS INTO THE IMAGES ARRAY.
+		var images = document.getElementsByTagName("img");
+		var sources = [];
+		var alts = [];
+
+		// USING FOR LOOP TO GET ALL DETAILS DECLARED ON ABOVE IN HTML (source, alts)
+		for (var i = 0; i < images.length; i++) {
+			sources.push(images[i].src);
+			alts.push(images[i].alt);
+		}
+
+		function showImage(value) {
+			// TO RETRIEVE THE TAGS FROM HTML
+			var desc = document.getElementById('descBox');
+			var bigImg = document.getElementById('imgBox');
+
+			// IF THERE IS ANY CHILD NODE, IT REMOVES CHILD NODES
+			while(desc.hasChildNodes()) {
+				desc.removeChild(desc.firstChild);
+			}
+
+			while(bigImg.hasChildNodes()) {
+				bigImg.removeChild(bigImg.firstChild);
+			}
+
+			// IF THE USER'S MOUSE IS OUT, IT ENDS.
+			if (value == -1)
+				return;
+			else
+			{
+				// CREATE ELEMENTS
+				var img = document.createElement("img");
+				var p = document.createElement("p");
+
+				// TO GIVE THE SOURCE TO THE CREATED IMAGE, TO GIVE THE TEXT TO THE CREATED PARAGRAPH.
+				img.src = sources[value];
+				img.alt = alts[value];
+				p.innerHTML = alts[value];
+				p.style.fontFamily = "Courier New";
+				p.style.fontSize = "20px";
+
+				// APPEND
+				desc.appendChild(p);
+				bigImg.appendChild(img);
+			}
+		}
+
+		//END OF SCRIPT
+	</script>
+</body>
+</html>
